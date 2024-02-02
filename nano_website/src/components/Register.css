@@ -1,0 +1,14 @@
+.btn-primary {
+    background-color: #9f23c4;
+    border-color: #9f23c4;
+}
+
+.btn-primary:hover {
+    background-color: darkmagenta;
+    border-color: darkmagenta;
+}
+
+.login-form:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease-in-out;
+}
