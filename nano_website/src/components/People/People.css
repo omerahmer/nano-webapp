@@ -1,0 +1,19 @@
+.row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.col-md-6 {
+    flex: 1 0 50%;
+    box-sizing: border-box;
+}
+
+.col-md-6 img {
+    max-width: 400px;
+    width: 100%;
+    height: auto;
+}
+
+.text-3xl {
+    font-size: 1.5rem;
+}
