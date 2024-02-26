@@ -10,16 +10,13 @@ import EnergyStorage from './components/Energy Storage/EnergyStorage';
 import Login from './components/Login/login';
 import Biosensor from './components/Biosensor/Biosensor';
 import Register from './components/Register/Register';
-import PrivateRoute from './PrivateRoute';
-
 function App() {
-
   return (
     <Router>
       <Header />
       <div className="container">
         <Routes>
-            <Route path="/" element={<Home />} />
+          <Route path="/" element={<Home />} />
           <Route path="/People" element={<PeoplePage />} />
           <Route path="/Biosensing" element={<Biosensing />} />
           <Route path="/EBeam" element={<EBeam />} />

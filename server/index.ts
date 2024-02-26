@@ -1,4 +1,4 @@
-const express = require('express');
+import express, { Request, Response, NextFunction } from 'express';
 const app = express();
 const cors = require('cors');
 const mongoose = require('mongoose');
@@ -11,13 +11,26 @@ app.use(express.json());
 
 mongoose.connect('mongodb://localhost:27017/nano-webapp');
 
-// Middleware to check for a valid token
-const authenticateToken = (req, res, next) => {
-    const token = req.headers['x-access-token'];
-    if (!token) return res.status(401).json({ status: 'error', error: 'Unauthorized' });
+interface AuthenticatedRequest extends Request {
+    user?: any;
+}
 
-    jwt.verify(token, 'secret123', (err, user) => {
-        if (err) return res.status(403).json({ status: 'error', error: 'Invalid token' });
+// Middleware to check for a valid token
+function authenticateToken(
+    req: AuthenticatedRequest,
+    res: Response,
+    next: NextFunction
+) {
+    const token = req.headers['x-access-token'];
+
+    if (!token) {
+        return res.status(401).json({ status: 'error', error: 'Unauthorized' });
+    }
+
+    jwt.verify(token, 'secret123', (err: any, user: any) => {
+        if (err) {
+            return res.status(403).json({ status: 'error', error: 'Invalid token' });
+        }
 
         req.user = user;
         next();
@@ -25,7 +38,7 @@ const authenticateToken = (req, res, next) => {
 };
 
 // Registration endpoint
-app.post('/api/register', async (req, res) => {
+app.post('/api/register', async (req: Request, res: Response) => {
     try {
         const newPassword = await bcrypt.hash(req.body.password, 10);
         await User.create({
@@ -39,7 +52,7 @@ app.post('/api/register', async (req, res) => {
 });
 
 // Login endpoint
-app.post('/api/login', async (req, res) => {
+app.post('/api/login', async (req: Request, res: Response) => {
     const user = await User.findOne({ username: req.body.username });
 
     if (!user) return res.json({ status: 'error', error: 'Invalid login' });
@@ -55,7 +68,7 @@ app.post('/api/login', async (req, res) => {
 });
 
 // Private Biosensor route
-app.get('/Biosensor', authenticateToken, async (req, res) => {
+app.get('/api/Biosensor', authenticateToken, async (req: AuthenticatedRequest, res: Response) => {
     try {
         const decoded = jwt.verify(req.headers['x-access-token'], 'secret123');
         const username = decoded.username;
@@ -70,7 +83,7 @@ app.get('/Biosensor', authenticateToken, async (req, res) => {
 });
 
 // Update Biosensor route (POST)
-app.post('/Biosensor', authenticateToken, async (req, res) => {
+app.post('/api/Biosensor', authenticateToken, async (req: AuthenticatedRequest, res: Response) => {
     try {
         const decoded = jwt.verify(req.headers['x-access-token'], 'secret123');
         const username = decoded.username;
