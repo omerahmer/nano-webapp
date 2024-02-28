@@ -1,9 +1,11 @@
 import React from 'react';
-import { Container, Row, Col, Card } from 'react-bootstrap';
+import { Container, Col } from 'react-bootstrap';
 import ReusableCard from '../Reusable Card/ReusableCard';
 import { useSpring, animated } from 'react-spring';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../Reusable Card/ReusableCard.css'
+import '../../index.css'
+
 
 interface CardData {
   title: string;
@@ -47,7 +49,7 @@ const Biosensing = () => {
 
   return (
     <animated.div style={fadeIn}>
-      <Container className="mt-5">
+      <Container className="mt-5 font-link">
         <h1 className="mb-4">Biosensing Solutions</h1>
         <p className="overview">The biosensing team develops cutting-edge technologies for medical diagnostics with our comprehensive understanding of nanomaterials. We investigate the potential of Carbon Nanotubes in biosensing applications through various techniques like functionalization, Electrochemical Impedance Spectroscopy, CAD, Microfabriation, and COMSOL. Here are the specific projects that allow our team to explore and maximize the capabilities of nanotechnology in medical diagnostics and materials science:</p>
         {cardsData.map((card, index) => (

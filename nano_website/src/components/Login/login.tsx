@@ -1,6 +1,8 @@
 import React, { useState, useEffect, FormEvent } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Login.css';
+import '../../index.css'
+
 
 const Login: React.FC = () => {
     const [username, setUsername] = useState('');
@@ -32,7 +34,7 @@ const Login: React.FC = () => {
     }
 
     return (
-        <div>
+        <div className="font-link">
             <h1 className="text-center mt-4 mb-4">Login</h1>
             <form onSubmit={loginUser} className="col-md-6 offset-md-3 p-4 rounded shadow login-form">
                 <div className="mb-3">

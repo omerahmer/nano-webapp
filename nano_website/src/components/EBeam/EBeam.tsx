@@ -5,6 +5,7 @@ import { Container } from 'react-bootstrap';
 import { useSpring, animated } from 'react-spring';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ReusableCard from '../Reusable Card/ReusableCard';
+import '../../index.css'
 
 interface CardData {
   title: string;

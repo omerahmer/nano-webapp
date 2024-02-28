@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useSpring, animated } from 'react-spring';
 import './styles.css';
+import '../index.css'
+
 
 interface CardWithHoverProps {
     backgroundImage: string;
@@ -19,7 +21,7 @@ const CardWithHover: React.FC<CardWithHoverProps> = ({ backgroundImage = '', tit
 
     return (
         <animated.div
-            className={`card card-cover h-100 overflow-hidden text-white bg-dark rounded-5 shadow-lg ${additionalClassName}`}
+            className={`card card-cover h-100 overflow-hidden text-white bg-dark rounded-5 shadow-lg font-link ${additionalClassName}`}
             style={{
                 backgroundImage: `url(${backgroundImage})`,
                 backgroundSize: "cover",
@@ -30,8 +32,8 @@ const CardWithHover: React.FC<CardWithHoverProps> = ({ backgroundImage = '', tit
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
         >
-            <div className={`d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1 ${additionalClassName}`}>
-                <h2 className={`pt-5 mt-5 mb-4 display-6 lh-1 fw-bold ${additionalClassName}`}>{title}</h2>
+            <div className={`d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1 ${additionalClassName} font-link`}>
+                <h2 className={`pt-5 mt-5 mb-4 display-6 lh-1 fw-bold ${additionalClassName} font-link`}>{title}</h2>
                 {content && <p className={additionalClassName}>{content}</p>}
                 {buttonText && (
                     <div className={`d-grid gap-2 d-md-flex justify-content-md-start mb-4 mb-lg-3 ${additionalClassName}`}>
@@ -56,15 +58,15 @@ const Home: React.FC = () => {
     };
 
     return (
-        <animated.div className="home" style={fadeIn}>
+        <animated.div className="home font-link" style={fadeIn}>
             <div className="container my-5">
                 <div className="row p-4 pb-0 pe-lg-0 pt-lg-5 align-items-center rounded-3 border shadow-lg">
                     <div className="col-lg-7 p-3 p-lg-5 pt-lg-3">
                         <h1 className="display-4 fw-bold lh-1 text-body-emphasis">Welcome to the Nanotechnology Laboratory at UC Berkeley!</h1>
                         <p className="lead">Welcome to our lab, where innovation converges to redefine biosensing, energy storage,
-                chip lithography, and much more. Our carbon nanotube sensors, developed in collaboration with leading
-                institutions including NASA Ames, Stanford, UCSF, Lawrence Berkeley National Labs, and UC Davis Medical
-                Center, revolutionize biosensing with unparalleled sensitivity, enabling simultaneous in-situ detection
+                chip lithography, and much more. Our carbon nanotube sensors, developed in collaboration with
+                institutions including NASA Ames, Stanford, UCSF, LBNL, and UC Davis Medical
+                Center, revolutionize biosensing with unparalleled sensitivity, enabling in-situ detection
                 of multiple biomarkers. <br></br><br></br>Beyond biosensing, these nanotubes achieve remarkable energy density in the form of a supercapacitor, setting a
                 new standard for energy storage capabilities. Join us in exploring the transformative potential of
                 nanotechnology in reshaping the future of biosensing and sustainable energy solutions.</p>
@@ -93,7 +95,6 @@ const Home: React.FC = () => {
                                 buttonText=''
                             />
                         </a>
-
                     </div>
 
                     <div className="col">
@@ -111,7 +112,7 @@ const Home: React.FC = () => {
                         <a href="/EBeam" style={linkStyle}>
                             <CardWithHover
                                 backgroundImage="ebeam%20pics/lithography.jpg"
-                                title="Electron-beam Lithography"
+                                title="E-beam Lithography"
                                 content="Extreme precision lithography with small feature sizes enabled by CNT's."
                                 buttonText=''
                             />

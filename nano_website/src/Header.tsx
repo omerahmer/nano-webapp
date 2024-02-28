@@ -5,10 +5,11 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
+import './index.css';
 
 const Header = () => {
   return (
-    <Navbar expand="lg" className="bg-body-tertiary">
+    <Navbar expand="lg" className="bg-body-tertiary font-link">
       <Container>
         <Navbar.Brand href="/">Nanotech Lab</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />

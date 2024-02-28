@@ -1,19 +1,34 @@
-.row {
-    display: flex;
-    flex-wrap: wrap;
+.people-image img {
+    height: 375px;
+    width: 375px;
+    object-fit: cover;
 }
 
-.col-md-6 {
-    flex: 1 0 50%;
-    box-sizing: border-box;
+.person-info .text-3xl {
+    font-size: 1.8rem;
+    font-weight: bold;
 }
 
-.col-md-6 img {
-    max-width: 400px;
-    width: 100%;
-    height: auto;
+.person-container {
+    margin-bottom: 30px;
 }
 
-.text-3xl {
-    font-size: 1.5rem;
+.person-info {
+    text-align: left;
+    margin-top: 20px;
+}
+
+.person-info p {
+    margin-bottom: 10px;
+}
+
+.font-link {
+    font-family: 'Poppins';
+}
+
+.font-italic {
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    font-style: italic;
+    font-size: 18px;
 }

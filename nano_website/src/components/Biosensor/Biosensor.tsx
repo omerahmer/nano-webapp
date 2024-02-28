@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useSpring, animated } from 'react-spring';
 import { useNavigate } from 'react-router-dom';
 import { decodeToken } from 'react-jwt';
+import '../../index.css'
+
 
 const Biosensor = () => {
     const fadeIn = useSpring({
@@ -51,7 +53,7 @@ const Biosensor = () => {
         return <p>Loading...</p>;
     }
     return (
-        <animated.div className="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column" style={fadeIn}>
+        <animated.div className="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column font-link" style={fadeIn}>
             <h1>Biosensor page under construction!</h1>
         </animated.div>
     );

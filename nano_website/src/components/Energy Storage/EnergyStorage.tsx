@@ -3,6 +3,7 @@ import { Container, Col } from 'react-bootstrap';
 import { useSpring, animated } from 'react-spring';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ReusableCard from '../Reusable Card/ReusableCard';
+import '../../index.css'
 
 interface CardData {
   title: string;
@@ -58,8 +59,8 @@ const EnergyStorage: React.FC = () => {
 
   return (
     <animated.div style={fadeIn}>
-      <Container className="mt-5">
-        <h1 className="mb-4">Biosensing Solutions</h1>
+      <Container className="mt-5 font-link">
+        <h1 className="mb-4">Energy Storage Solutions</h1>
         {cardsData.map((card, index) => (
           <Col key={index} className="mb-4">
             <ReusableCard {...card} />

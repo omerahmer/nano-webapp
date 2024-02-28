@@ -1,5 +1,6 @@
 import React, { useState, FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom'
+import '../../index.css'
 
 const Register: React.FC = () => {
     const navigate = useNavigate()
