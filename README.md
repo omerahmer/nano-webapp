@@ -2,7 +2,7 @@
 
 cd to nano_website and run "npm i" then "npm start" in the terminal
 
-open another terminal window, cd to server, run "npm run dev"
+open another terminal window, cd to server, run "npm i" then "npm run dev"
 
 download mongodb (follow instructions on "https://www.prisma.io/dataguide/mongodb/setting-up-a-local-mongodb-database")
 
