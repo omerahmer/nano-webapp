@@ -1,15 +1,22 @@
 import express, { Request, Response, NextFunction } from 'express';
 const app = express();
 const cors = require('cors');
-const mongoose = require('mongoose');
-const User = require('./models/user.model');
+const fs = require('fs');
+const csv = require('csv-parser');
+const createCsvWriter = require('csv-writer').createObjectCsvWriter;
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 
 app.use(cors());
 app.use(express.json());
 
-mongoose.connect('mongodb://localhost:27017/nano-webapp');
+// Path to the CSV file
+const csvFilePath = 'users.csv';
+
+interface User {
+    username: string;
+    password: string;
+}
 
 interface AuthenticatedRequest extends Request {
     user?: any;
@@ -35,44 +42,88 @@ function authenticateToken(
         req.user = user;
         next();
     });
-};
+}
 
 // Registration endpoint
 app.post('/api/register', async (req: Request, res: Response) => {
     try {
         const newPassword = await bcrypt.hash(req.body.password, 10);
-        await User.create({
-            username: req.body.username,
-            password: newPassword,
+
+        // Read existing users from CSV file
+        const users: User[] = fs.existsSync(csvFilePath)
+            ? fs.readFileSync(csvFilePath, 'utf-8').trim().split('\n').map((line: string) => {
+                const [username, password] = line.split(',');
+                return { username, password };
+            })
+            : [];
+
+        // Check for duplicate username
+        const isDuplicate = users.some((user) => user.username === req.body.username);
+
+        if (isDuplicate) {
+            return res.json({ status: 'error', error: 'Duplicate username' });
+        }
+
+        // Append new user to CSV file
+        const csvWriter = createCsvWriter({
+            path: csvFilePath,
+            header: ['username', 'password'],
+            append: true,
         });
+
+        await csvWriter.writeRecords([
+            { username: req.body.username, password: newPassword },
+        ]);
+
         res.json({ status: 'ok' });
     } catch (err) {
-        res.json({ status: 'error', error: 'Duplicate username' });
+        res.json({ status: 'error', error: 'Failed to register user' });
     }
 });
 
 // Login endpoint
 app.post('/api/login', async (req: Request, res: Response) => {
-    const user = await User.findOne({ username: req.body.username });
+    try {
+        // Implement login logic using CSV file
+        const users: User[] = fs.existsSync(csvFilePath)
+            ? fs.readFileSync(csvFilePath, 'utf-8').trim().split('\n').map((line: string) => {
+                const [username, password] = line.split(',');
+                return { username, password };
+            })
+            : [];
 
-    if (!user) return res.json({ status: 'error', error: 'Invalid login' });
+        const user = users.find((u) => u.username === req.body.username);
 
-    const isPasswordValid = await bcrypt.compare(req.body.password, user.password);
+        if (!user) {
+            return res.json({ status: 'error', error: 'Invalid login' });
+        }
 
-    if (isPasswordValid) {
-        const token = jwt.sign({ username: user.username }, 'secret123');
-        return res.json({ status: 'ok', user: token });
-    } else {
-        return res.json({ status: 'error', user: false });
+        const isPasswordValid = await bcrypt.compare(req.body.password, user.password);
+
+        if (isPasswordValid) {
+            const token = jwt.sign({ username: user.username }, 'secret123');
+            return res.json({ status: 'ok', user: token });
+        } else {
+            return res.json({ status: 'error', user: false });
+        }
+    } catch (err) {
+        res.json({ status: 'error', error: 'Login failed' });
     }
 });
 
 // Private Biosensor route
 app.get('/api/Biosensor', authenticateToken, async (req: AuthenticatedRequest, res: Response) => {
     try {
+        const users: User[] = fs.existsSync(csvFilePath)
+            ? fs.readFileSync(csvFilePath, 'utf-8').trim().split('\n').map((line: string) => {
+                const [username, password] = line.split(',');
+                return { username, password };
+            })
+            : [];
+
         const decoded = jwt.verify(req.headers['x-access-token'], 'secret123');
         const username = decoded.username;
-        const user = await User.findOne({ username: username });
+        const user = users.find((u) => u.username === username);
 
         // Your logic for the Biosensor route here
         res.json({ status: 'ok', message: 'Biosensor data for authenticated user' });
@@ -85,11 +136,25 @@ app.get('/api/Biosensor', authenticateToken, async (req: AuthenticatedRequest, r
 // Update Biosensor route (POST)
 app.post('/api/Biosensor', authenticateToken, async (req: AuthenticatedRequest, res: Response) => {
     try {
+        const users: User[] = fs.existsSync(csvFilePath)
+            ? fs.readFileSync(csvFilePath, 'utf-8').trim().split('\n').map((line: string) => {
+                const [username, password] = line.split(',');
+                return { username, password };
+            })
+            : [];
+
         const decoded = jwt.verify(req.headers['x-access-token'], 'secret123');
         const username = decoded.username;
-        await User.updateOne({ username: username });
+        const userIndex = users.findIndex((u) => u.username === username);
 
-        res.json({ status: 'ok', message: 'Biosensor data updated for authenticated user' });
+        if (userIndex !== -1) {
+            // Your logic for updating Biosensor data here
+            // ...
+
+            res.json({ status: 'ok', message: 'Biosensor data updated for authenticated user' });
+        } else {
+            res.status(403).json({ status: 'error', error: 'Invalid token' });
+        }
     } catch (error) {
         console.log(error);
         res.status(403).json({ status: 'error', error: 'Invalid token' });
