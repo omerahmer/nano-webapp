@@ -167,7 +167,3 @@ app.post('/api/Biosensor', authenticateToken, async (req: AuthenticatedRequest, 
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'static/index.html'))
 });
-
-app.listen(1337, () => {
-    console.log('Server started on 1337');
-});
