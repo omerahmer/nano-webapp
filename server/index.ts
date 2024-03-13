@@ -6,11 +6,12 @@ const csv = require('csv-parser');
 const createCsvWriter = require('csv-writer').createObjectCsvWriter;
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
+const path = require('path');
 
 app.use(cors());
 app.use(express.json());
+app.use(express.static('static'));
 
-// Path to the CSV file
 const csvFilePath = 'users.csv';
 
 interface User {
@@ -22,7 +23,6 @@ interface AuthenticatedRequest extends Request {
     user?: any;
 }
 
-// Middleware to check for a valid token
 function authenticateToken(
     req: AuthenticatedRequest,
     res: Response,
@@ -44,7 +44,6 @@ function authenticateToken(
     });
 }
 
-// Registration endpoint
 app.post('/api/register', async (req: Request, res: Response) => {
     try {
         const newPassword = await bcrypt.hash(req.body.password, 10);
@@ -57,7 +56,6 @@ app.post('/api/register', async (req: Request, res: Response) => {
             })
             : [];
 
-        // Check for duplicate username
         const isDuplicate = users.some((user) => user.username === req.body.username);
 
         if (isDuplicate) {
@@ -81,7 +79,6 @@ app.post('/api/register', async (req: Request, res: Response) => {
     }
 });
 
-// Login endpoint
 app.post('/api/login', async (req: Request, res: Response) => {
     try {
         // Implement login logic using CSV file
@@ -111,7 +108,6 @@ app.post('/api/login', async (req: Request, res: Response) => {
     }
 });
 
-// Private Biosensor route
 app.get('/api/Biosensor', authenticateToken, async (req: AuthenticatedRequest, res: Response) => {
     try {
         const users: User[] = fs.existsSync(csvFilePath)
@@ -133,7 +129,6 @@ app.get('/api/Biosensor', authenticateToken, async (req: AuthenticatedRequest, r
     }
 });
 
-// Update Biosensor route (POST)
 app.post('/api/Biosensor', authenticateToken, async (req: AuthenticatedRequest, res: Response) => {
     try {
         const users: User[] = fs.existsSync(csvFilePath)
@@ -148,9 +143,6 @@ app.post('/api/Biosensor', authenticateToken, async (req: AuthenticatedRequest, 
         const userIndex = users.findIndex((u) => u.username === username);
 
         if (userIndex !== -1) {
-            // Your logic for updating Biosensor data here
-            // ...
-
             res.json({ status: 'ok', message: 'Biosensor data updated for authenticated user' });
         } else {
             res.status(403).json({ status: 'error', error: 'Invalid token' });
@@ -160,6 +152,10 @@ app.post('/api/Biosensor', authenticateToken, async (req: AuthenticatedRequest, 
         res.status(403).json({ status: 'error', error: 'Invalid token' });
     }
 });
+
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'static/index.html'))
+})
 
 app.listen(1337, () => {
     console.log('Server started on 1337');
