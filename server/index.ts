@@ -7,10 +7,21 @@ const createCsvWriter = require('csv-writer').createObjectCsvWriter;
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const path = require('path');
+const http = require('http');
+
+const dir = "/home/n/na/nanotech/nano-webapp/server/static";
 
 app.use(cors());
 app.use(express.json());
-app.use(express.static('static'));
+app.use(express.static(dir));
+
+const sock = process.env.PORT || '/srv/apps/$USER/$USER.sock';
+
+const server = http.createServer(app);
+
+server.listen(sock, () => {
+    console.log(`server is listening on socket ${sock}`);
+})
 
 const csvFilePath = 'users.csv';
 
@@ -155,7 +166,7 @@ app.post('/api/Biosensor', authenticateToken, async (req: AuthenticatedRequest, 
 
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'static/index.html'))
-})
+});
 
 app.listen(1337, () => {
     console.log('Server started on 1337');
