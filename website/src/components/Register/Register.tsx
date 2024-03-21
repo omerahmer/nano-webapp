@@ -9,7 +9,7 @@ const Register: React.FC = () => {
 
     async function registerUser(event: FormEvent) {
         event.preventDefault();
-        const response = await fetch('http://localhost:1337/api/register', {
+        const response = await fetch('https://nanotech.berkeley.edu/api/register', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
