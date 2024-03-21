@@ -9,19 +9,14 @@ const bcrypt = require('bcrypt');
 const path = require('path');
 const http = require('http');
 
-const dir = "/home/n/na/nanotech/nano-webapp/server/static";
+const dir = "/home/n/na/nanotech/nano-website/website/public";
+const sock = process.env.PORT || '/srv/apps/$USER/$USER.sock';
 
 app.use(cors());
 app.use(express.json());
 app.use(express.static(dir));
 
-const sock = process.env.PORT || '/srv/apps/$USER/$USER.sock';
-
-const server = http.createServer(app);
-
-server.listen(sock, () => {
-    console.log(`server is listening on socket ${sock}`);
-})
+app.listen(sock, () => {console.log("running")})
 
 const csvFilePath = 'users.csv';
 
