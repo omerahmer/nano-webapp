@@ -29,7 +29,7 @@ const Biosensor = () => {
                     return;
                 }
                 setLoading(false);
-                const req = await fetch('http://localhost:1337/api/Biosensor', {
+                const req = await fetch('https://nanotech.berkeley.edu/api/Biosensor', {
                     headers: {
                         'x-access-token': token,
                     },
