@@ -579,7 +579,7 @@ export default (input) => {
 
   output["chipEnergyWattHoursPerLiter"] = chipEnergyWattHoursPerLiter;
 
-  console.log("Experiment Complete!");
+  console.log("experiment happened");
   console.log(output);
 
   return output;

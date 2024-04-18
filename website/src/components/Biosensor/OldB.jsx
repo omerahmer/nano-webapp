@@ -1,64 +1,134 @@
 import React, { useState } from "react";
-import { CSVLink } from "react-csv";
-
 import Plot from "react-plotly.js";
+
 import TableDisplay from "/Users/ayushpanta/Documents/nano24/website/nano-site/website/src/components/Biosensor/b_comps/config_display.jsx";
+import Calculations from "/Users/ayushpanta/Documents/nano24/website/nano-site/website/src/components/Biosensor/b_comps/simulations.jsx";
 
-import Calculations from "/Users/ayushpanta/Documents/nano24/website/nano-site/website/src/components/Biosensor/b_comps/simulations";
-
-const OldB = (props) => {
+export default () => {
   const [experimentIsRunning, setExperimentIsRunning] = useState(false);
+
+  //   const [fields, setFields] = useState(config_data);
   const [sims, setSims] = useState(sims_data);
   const [calcs, setCalcs] = useState(Calculations(sims));
 
-  const experimentConfig = (
-    <div className="flex flex-col lg:flex-row justify-center h-screen">
-      <div className="flex flex-col lg:w-1/2 space-y-10 px-8">
-        <TableDisplay name="Simulation" data={sims} setData={setSims} />
+  let experiment_config = (
+<div style={{ display: "inline-block"}}>
+  {/* Div containing the table */}
+  <div style={{ display: "flex", flexWrap: "wrap", width: "100%" }}>
+  {/* Table div */}
+  <div style={{ width: "50%", padding: "5px" }}>
+    <TableDisplay name={"Simulation"} data={sims} setData={setSims}/>
+  </div>
+
+  {/* Images div */}
+  <div style={{ width: "50%", padding: "5px" }}>
+    {/* Use Flexbox to organize images and titles in different rows */}
+    <div style={{ display: "flex", flexDirection: "column" }}>
+      {/* Nanostructure */}
+      <div style={{ padding: "5px" }}>
+        <p>Nanostructure</p>
+        <img
+          src="https://i.ibb.co/jVmfXQG/one-cnt-and-board.png"
+          alt="Nanostructure"
+          style={{ maxWidth: "100%", height: "auto", objectFit: "contain" }}
+        />
       </div>
-      <div className="flex flex-col lg:w-1/2 px-8">
-        <div className="overflow-hidden mb-4">
-          <p>Nanostructure</p>
-          <img src="https://i.ibb.co/jVmfXQG/one-cnt-and-board.png" alt="Nanostructure" />
-        </div>
-        <div className="overflow-hidden mb-4">
-          <p>Materials Stack</p>
-          <img src="https://i.ibb.co/19PVCWK/Field-penetration.png" alt="Materials Stack" />
-        </div>
-        <div className="overflow-hidden mb-4">
-          <p>Dielectric</p>
-          <img src="https://i.ibb.co/rM7G6cd/Dielectric.png" alt="Dielectric" />
-        </div>
-        <div className="overflow-hidden mb-4">
-          <p>Circuit</p>
-          <img src="https://i.ibb.co/gtvy7Kn/circuit.png" alt="Circuit" />
-        </div>
-        <div className="overflow-hidden">
-          <p>Functionalization and Analyte</p>
-          <img src="https://i.ibb.co/HK0r4p6/channel.png" alt="Functionalization and Analyte" />
-        </div>
+
+      {/* Materials Stack */}
+      <div style={{ padding: "5px" }}>
+        <p>Materials Stack</p>
+        <img
+          src="https://i.ibb.co/19PVCWK/Field-penetration.png"
+          alt="Materials Stack"
+          style={{ maxWidth: "100%", height: "auto", objectFit: "contain" }}
+        />
+      </div>
+
+      {/* Dielectric */}
+      <div style={{ padding: "5px" }}>
+        <p>Dielectric</p>
+        <img
+          src="https://i.ibb.co/rM7G6cd/Dielectric.png"
+          alt="Dielectric"
+          style={{ maxWidth: "100%", height: "auto", objectFit: "contain" }}
+        />
+      </div>
+
+      {/* Circuit */}
+      <div style={{ padding: "5px" }}>
+        <p>Circuit</p>
+        <img
+          src="https://i.ibb.co/gtvy7Kn/circuit.png"
+          alt="Circuit"
+          style={{ maxWidth: "100%", height: "auto", objectFit: "contain" }}
+        />
+      </div>
+
+      {/* Functionalization and Analyte */}
+      <div style={{ padding: "5px" }}>
+        <p>Functionalization and Analyte</p>
+        <img
+          src="https://i.ibb.co/HK0r4p6/channel.png"
+          alt="Channel"
+          style={{ maxWidth: "100%", height: "auto", objectFit: "contain" }}
+        />
       </div>
     </div>
-  );
+  </div>
+</div>
+</div>
 
-  const experimentDashboard = (
-    <div className="h-screen w-full flex flex-col items-center bg-white">
-      <div className="w-full">
-        <button
-          onClick={startExperiment}
-          className="border-2 p-2 mb-4 rounded hover:bg-red-600 hover:text-white w-full lg:w-auto"
-        >
-          Start Experiment
-        </button>
-      </div>
+);
 
-      <div className="w-full">
-        <div className="mb-4">
-          <TableDisplay name="Calculations" data={calcs} setData={setCalcs} />
+<style>
+{`
+  @media (max-width: 768px) {
+    div[style*="width: 50%"] {
+      width: 100%;
+    }
+  }
+`}
+</style>
+  
+  // , border: "1px solid #ccc", padding: "5px" 
+
+  let experiment_dashboard = (
+    <div className="h-screen bg-white" style={{ flex: "1"}}>
+      Experiment graphs
+      <br />
+      <button
+        onClick={() => startExperiment()}
+        className="border-2 p-2 m-2 rounded hover:bg-red-600 hover:text-white"
+      >
+        Start Experiment
+      </button>
+      <br />
+      <div className="overflow-hidden bg-white" >
+        <div>
+          <TableDisplay
+            name={"Calculations"}
+            data={Calculations(sims)}
+            setData={setCalcs}
+          />
         </div>
-        <div className="w-full">
-          <Plot
-            data={[
+
+        <div className="">
+          <Plot>
+            data=
+            {[
+              {
+                x: [1, 2, 3],
+                y: [1, 2, 3],
+                type: "line",
+                mode: "lines+markers",
+                marker: { color: "red" },
+              },
+            ]}
+            layout={{ title: "Test Plot" }} 
+          </Plot>
+          <Plot>
+            data=
+            {[
               {
                 x: [1, 2, 3],
                 y: [1, 2, 3],
@@ -68,42 +138,58 @@ const OldB = (props) => {
               },
             ]}
             layout={{ title: "Test Plot" }}
-          />
+          </Plot>
         </div>
-        {/* Add more plots or content here if needed */}
+        <div>
+          <Plot>
+            data=
+            {[
+              {
+                x: [1, 2, 3],
+                y: [1, 2, 3],
+                type: "line",
+                mode: "lines+markers",
+                marker: { color: "red" },
+              },
+            ]}
+            layout={{ title: "Test Plot" }}
+          </Plot>
+          <Plot>
+            data=
+            {[
+              {
+                x: [1, 2, 3],
+                y: [1, 2, 3],
+                type: "line",
+                mode: "lines+markers",
+                marker: { color: "red" },
+              },
+            ]}
+            layout={{ title: "Test Plot" }}
+          </Plot>
+        </div>
       </div>
     </div>
   );
 
   return (
-    <div className="h-screen w-full bg-white">
-      <div className="flex flex-row h-full">
-        <div className="w-1/2 p-4 text-center">
-          <div className="font-bold mb-4">
+    <div className="bg-white">
+      <div className="text-center">
+        <header>
+          <div className="font-bold p-2">
             Experiment: {experimentIsRunning ? "Running" : "Not Running"}
           </div>
           <button
             type="button"
-            onClick={() => setExperimentIsRunning((prev) => !prev)}
-            className="border-2 p-2 rounded hover:bg-red-600 hover:text-white"
+            onClick={() => setExperimentIsRunning((o) => !o)}
+            className="border-2 p-2 m-2 rounded hover:bg-red-600 hover:text-white"
           >
             Toggle Experiment
           </button>
-        </div>
-        <div className="w-1/2">
-          <div className="flex flex-col justify-center items-center">
-            <TableDisplay name="Simulation" data={sims} setData={setSims} />
-            <div className="mt-4">
-              <CSVLink
-                className="py-2 px-4 rounded-md bg-indigo-600 text-black hover:bg-indigo-700 transition"
-                filename={`${props.name}_Config.csv`}
-                data={jsonToCSV(props.data)}
-                target="_blank"
-              >
-                Download Simulation Configuration
-              </CSVLink>
-            </div>
-          </div>
+        </header>
+
+        <div className="">
+          {!experimentIsRunning ? experiment_config : experiment_dashboard}
         </div>
       </div>
     </div>
@@ -111,9 +197,31 @@ const OldB = (props) => {
 };
 
 function startExperiment() {
-  console.log("Experiment started");
-}
+  // let configPayload = JSON.stringify(fields)
 
+  // const socket = new WebSocket("ws://localhost:8080/jadoo")
+
+  // const stompClient = Stomp.over(socket)
+  // stompClient.connect({}, frame => {
+  //     console.log("connected: ", frame)
+  // })
+
+  // stompClient.subscribe("/app/start", data => {
+  //     console.log(JSON.parse(data.body))
+  // })
+
+  // stompClient.send("/app/start",  {}, configPayload)
+
+  console.log("this function is out of use");
+  // setExperimentIsRunning(true);
+
+
+  // try {
+  //     socket.send("/app/start",  {}, configPayload)
+  // } catch (e) {
+  //     console.error(e)
+  // }
+}
 
 let sims_data = {
   radiusOfCNTs: 5e-9,
@@ -167,34 +275,3 @@ let sims_data = {
   lensOuterRadius: 1.95e-3,
   lithographyTime: 10 * 60,
 };
-
-
-
-function jsonToCSV(data) {
-  if (!data) {
-    // Return an empty array or other appropriate default value
-    return [];
-  }
-  const csvData = Object.entries(data).map(([key, value]) => ({
-    Key: textCamelToSpace(key),
-    Value: value,
-  }));
-  return csvData;
-}
-
-// Helper functions
-function textCamelToSpace(input) {
-  let output = input[0].toUpperCase();
-  for (let i = 1; i < input.length; i++) {
-    let char = input[i];
-    let prevChar = input[i - 1];
-    if (char === char.toUpperCase() && prevChar === prevChar.toLowerCase()) {
-      output += " " + char;
-    } else {
-      output += char;
-    }
-  }
-  return output;
-}
-
-export default OldB;

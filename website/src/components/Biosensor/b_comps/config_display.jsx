@@ -1,9 +1,10 @@
 import React, { useState } from "react";
+import Popup from "reactjs-popup";
 import { CSVLink } from "react-csv";
 
-// Component
-export default (props) => {
+const TableDisplay = ({ name, data, setData }) => {
   const [open, setOpen] = useState(false);
+  const closeModal = () => setOpen(false);
 
   function shrinkLen(input) {
     input = input.toString();
@@ -14,89 +15,90 @@ export default (props) => {
   }
 
   return (
-    <div className="h-screen px-8 md:px-20 py-10 bg-gray-100">
+    <div className="bg-white p-2 flex"> 
+      {/* Download Button */}
       <button
         type="button"
-        className="border-2 p-2 rounded-md bg-indigo-600 text-black hover:bg-indigo-700 transition"
-        onClick={() => setOpen(!open)}
+        className="border-2 p-1 rounded hover:bg-red-600 hover:text-white mb-2"
+        onClick={() => setOpen((o) => !o)}
       >
-        Download {props.name} Configuration
+        Download {name} Configuration
       </button>
 
-      {/* Value Tables */}
-<table className="my-8 w-full border-collapse bg-white shadow-md rounded-md">
-  <thead>
-    <tr className="bg-indigo-600 text-black">
-      <th className="py-2 px-4 text-left">{props.name} Configuration</th>
-      <th className="py-2 px-4 text-center">Value</th>
-    </tr>
-  </thead>
-  <tbody>
-    {Object.keys(props.data).map((item, index) => {
-      if (props.data[item] === "header") {
-        return (
-          <React.Fragment key={item}>
-            <tr className="bg-gray-200">
-              <td colSpan="2" className="py-1 px-2"></td>
-            </tr>
-            <tr>
-              <td colSpan="2" className="py-1 px-2 font-semibold text-lg">
-                {textCamelToSpace(item)}:
-              </td>
-            </tr>
-            <tr className="bg-gray-200">
-              <td colSpan="2" className="py-1 px-2"></td>
-            </tr>
-          </React.Fragment>
-        );
-      }
+      {/* Download Popup */}
+      <Popup open={open} closeOnDocumentClick onClose={closeModal}>
+        <div className="bg-white rounded-lg p-2"> 
+          <CSVLink
+            className="border-2 p-1 rounded hover:bg-red-600 hover:text-white"
+            filename={`${name}Config.csv`}
+            data={jsonToCSV(data)}
+            target="_blank"
+          > 
+            Download {name} Configuration
+          </CSVLink>
+          <button
+            className="ml-2 text-red-600 hover:text-red-800"
+            onClick={closeModal}
+          >
+            Close
+          </button>
+        </div>
+      </Popup>
 
-      return (
-        <tr className="border-t border-gray-200" key={item}>
-          <td className="py-2 px-4 text-left font-medium">
-            {textCamelToSpace(item)}:
-          </td>
-          <td className="py-2 px-4 text-center">
-            <input
-              type="text"
-              className="py-1 px-2 rounded-md border border-gray-300 bg-white text-gray-800"
-              defaultValue={shrinkLen(props.data[item])}
-              onChange={(e) => {
-                props.data[item] = shrinkLen(e.target.value);
-                props.setData(props.data);
-              }}
-            />
-          </td>
-        </tr>
-      );
-    })}
-  </tbody>
-</table>
+      {/* Value Table */}
+      <div className="flex w-full">
+        <div className="w-1/2 p-2">
+        <table className="w-full table-fixed border border-gray-300"> 
+        <thead>
+          <tr className="bg-gray-200 border-b-2 border-gray-300"> 
+            <th className="p-1 text-left text-xl font-semibold">{name} Configuration</th> 
+            <th className="p-1 text-center text-xl font-semibold">Value</th> 
+          </tr>
+        </thead>
+        <tbody>
+          {Object.keys(data).map((key) => {
+            if (data[key] === "header") {
+              return (
+                <tr key={key}>
+                  <td colSpan={2} className="py-2"></td>
+                </tr>
+              );
+            }
 
-
-      {/* Download Configuration */}
-      <div className="mt-8">
-        <CSVLink
-          className="py-2 px-4 rounded-md bg-indigo-600 text-black hover:bg-indigo-700 transition"
-          filename={`${props.name}_Config.csv`}
-          data={jsonToCSV(props.data)}
-          target="_blank"
-        >
-          Download {props.name} Configuration
-        </CSVLink>
+            return (
+              <tr key={key} className="border-b border-gray-300"> 
+                <td className="p-1 text-left">{textCamelToSpace(key)}:</td> 
+                <td className="p-1 text-center"> 
+                  <input
+                    type="text"
+                    className="bg-gray-100 text-center rounded-sm p-1 border border-gray-300" 
+                    defaultValue={shrinkLen(data[key])}
+                    onChange={(e) => {
+                      data[key] = shrinkLen(e.target.value);
+                      setData(data);
+                    }}
+                  />
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+        </div>
       </div>
+
     </div>
   );
 };
 
-// Helper functions
+
 function textCamelToSpace(input) {
   let output = input[0].toUpperCase();
   for (let i = 1; i < input.length; i++) {
     let char = input[i];
     let prevChar = input[i - 1];
     if (char === char.toUpperCase() && prevChar === prevChar.toLowerCase()) {
-      output += " " + char;
+      output += ` ${char}`;
     } else {
       output += char;
     }
@@ -105,13 +107,8 @@ function textCamelToSpace(input) {
 }
 
 function jsonToCSV(data) {
-  if (!data) {
-    // Return an empty array or other appropriate default value
-    return [];
-  }
-  const csvData = Object.entries(data).map(([key, value]) => ({
-    Key: textCamelToSpace(key),
-    Value: value,
-  }));
-  return csvData;
+  const outputArray = Object.entries(data).map(([key, value]) => [key, value]);
+  return outputArray;
 }
+
+export default TableDisplay;
