@@ -1,10 +1,12 @@
 import React, { useState } from "react";
-import Plot from "react-plotly.js";
+import { CSVLink } from "react-csv";
 
+import Plot from "react-plotly.js";
 import TableDisplay from "/Users/ayushpanta/Documents/nano24/website/nano-site/website/src/components/Biosensor/b_comps/config_display.jsx";
+
 import Calculations from "/Users/ayushpanta/Documents/nano24/website/nano-site/website/src/components/Biosensor/b_comps/simulations";
 
-const OldB = () => {
+const OldB = (props) => {
   const [experimentIsRunning, setExperimentIsRunning] = useState(false);
   const [sims, setSims] = useState(sims_data);
   const [calcs, setCalcs] = useState(Calculations(sims));
@@ -75,9 +77,9 @@ const OldB = () => {
 
   return (
     <div className="h-screen w-full bg-white">
-      <div className="flex flex-col items-center justify-center h-full text-center">
-        <header className="mb-4">
-          <div className="font-bold p-2">
+      <div className="flex flex-row h-full">
+        <div className="w-1/2 p-4 text-center">
+          <div className="font-bold mb-4">
             Experiment: {experimentIsRunning ? "Running" : "Not Running"}
           </div>
           <button
@@ -87,19 +89,30 @@ const OldB = () => {
           >
             Toggle Experiment
           </button>
-        </header>
-        <div className="flex-grow">{experimentIsRunning ? experimentDashboard : experimentConfig}</div>
+        </div>
+        <div className="w-1/2">
+          <div className="flex flex-col justify-center items-center">
+            <TableDisplay name="Simulation" data={sims} setData={setSims} />
+            <div className="mt-4">
+              <CSVLink
+                className="py-2 px-4 rounded-md bg-indigo-600 text-black hover:bg-indigo-700 transition"
+                filename={`${props.name}_Config.csv`}
+                data={jsonToCSV(props.data)}
+                target="_blank"
+              >
+                Download Simulation Configuration
+              </CSVLink>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
 };
 
-
 function startExperiment() {
-  // Implement start experiment logic here.
   console.log("Experiment started");
 }
-
 
 
 let sims_data = {
@@ -155,5 +168,33 @@ let sims_data = {
   lithographyTime: 10 * 60,
 };
 
+
+
+function jsonToCSV(data) {
+  if (!data) {
+    // Return an empty array or other appropriate default value
+    return [];
+  }
+  const csvData = Object.entries(data).map(([key, value]) => ({
+    Key: textCamelToSpace(key),
+    Value: value,
+  }));
+  return csvData;
+}
+
+// Helper functions
+function textCamelToSpace(input) {
+  let output = input[0].toUpperCase();
+  for (let i = 1; i < input.length; i++) {
+    let char = input[i];
+    let prevChar = input[i - 1];
+    if (char === char.toUpperCase() && prevChar === prevChar.toLowerCase()) {
+      output += " " + char;
+    } else {
+      output += char;
+    }
+  }
+  return output;
+}
 
 export default OldB;

@@ -24,7 +24,7 @@ export default (props) => {
       </button>
 
       {/* Value Tables */}
-      <table className="my-8 w-full border-collapse bg-white shadow-md rounded-md">
+<table className="my-8 w-full border-collapse bg-white shadow-md rounded-md">
   <thead>
     <tr className="bg-indigo-600 text-black">
       <th className="py-2 px-4 text-left">{props.name} Configuration</th>
@@ -105,6 +105,10 @@ function textCamelToSpace(input) {
 }
 
 function jsonToCSV(data) {
+  if (!data) {
+    // Return an empty array or other appropriate default value
+    return [];
+  }
   const csvData = Object.entries(data).map(([key, value]) => ({
     Key: textCamelToSpace(key),
     Value: value,
