@@ -11,166 +11,136 @@ export default () => {
   const [sims, setSims] = useState(sims_data);
   const [calcs, setCalcs] = useState(Calculations(sims));
 
-  let experiment_config = (
-<div style={{ display: "inline-block"}}>
-  {/* Div containing the table */}
-  <div style={{ display: "flex", flexWrap: "wrap", width: "100%" }}>
-  {/* Table div */}
-  <div style={{ width: "50%", padding: "5px" }}>
-    <TableDisplay name={"Simulation"} data={sims} setData={setSims}/>
-  </div>
+  // , style = {{border: "1px solid #ccc", padding: "5px"}}
 
-  {/* Images div */}
-  <div style={{ width: "50%", padding: "5px" }}>
-    {/* Use Flexbox to organize images and titles in different rows */}
-    <div style={{ display: "flex", flexDirection: "column" }}>
-      {/* Nanostructure */}
-      <div style={{ padding: "5px" }}>
-        <p>Nanostructure</p>
-        <img
-          src="https://i.ibb.co/jVmfXQG/one-cnt-and-board.png"
-          alt="Nanostructure"
-          style={{ maxWidth: "100%", height: "auto", objectFit: "contain" }}
-        />
+ let experiment_config = (
+    <div className="overflow-hidden"style={{ display: "inline-block"}}>
+      <div className= "container" style={{  border: "1px solid #ccc", display: "flex", flexWrap: "wrap", width: "100%"}}>
+      {/* Table div */}
+      <div className = "tbl" style={{  border: "1px solid #ccc", width: "50%", padding: "0px" }}>
+        <TableDisplay name={"Simulation"} data={sims} setData={setSims}/>
       </div>
-
-      {/* Materials Stack */}
-      <div style={{ padding: "5px" }}>
-        <p>Materials Stack</p>
-        <img
-          src="https://i.ibb.co/19PVCWK/Field-penetration.png"
-          alt="Materials Stack"
-          style={{ maxWidth: "100%", height: "auto", objectFit: "contain" }}
-        />
-      </div>
-
-      {/* Dielectric */}
-      <div style={{ padding: "5px" }}>
-        <p>Dielectric</p>
-        <img
-          src="https://i.ibb.co/rM7G6cd/Dielectric.png"
-          alt="Dielectric"
-          style={{ maxWidth: "100%", height: "auto", objectFit: "contain" }}
-        />
-      </div>
-
-      {/* Circuit */}
-      <div style={{ padding: "5px" }}>
-        <p>Circuit</p>
-        <img
-          src="https://i.ibb.co/gtvy7Kn/circuit.png"
-          alt="Circuit"
-          style={{ maxWidth: "100%", height: "auto", objectFit: "contain" }}
-        />
-      </div>
-
-      {/* Functionalization and Analyte */}
-      <div style={{ padding: "5px" }}>
-        <p>Functionalization and Analyte</p>
-        <img
-          src="https://i.ibb.co/HK0r4p6/channel.png"
-          alt="Channel"
-          style={{ maxWidth: "100%", height: "auto", objectFit: "contain" }}
-        />
-      </div>
-    </div>
-  </div>
-</div>
-</div>
-
-);
-
-<style>
-{`
-  @media (max-width: 768px) {
-    div[style*="width: 50%"] {
-      width: 100%;
-    }
-  }
-`}
-</style>
-  
-  // , border: "1px solid #ccc", padding: "5px" 
-
-  let experiment_dashboard = (
-    <div className="h-screen bg-white" style={{ flex: "1"}}>
-      Experiment graphs
-      <br />
-      <button
-        onClick={() => startExperiment()}
-        className="border-2 p-2 m-2 rounded hover:bg-red-600 hover:text-white"
-      >
-        Start Experiment
-      </button>
-      <br />
-      <div className="overflow-hidden bg-white" >
-        <div>
-          <TableDisplay
-            name={"Calculations"}
-            data={Calculations(sims)}
-            setData={setCalcs}
-          />
-        </div>
-
-        <div className="">
-          <Plot>
-            data=
-            {[
-              {
-                x: [1, 2, 3],
-                y: [1, 2, 3],
-                type: "line",
-                mode: "lines+markers",
-                marker: { color: "red" },
-              },
-            ]}
-            layout={{ title: "Test Plot" }} 
-          </Plot>
-          <Plot>
-            data=
-            {[
-              {
-                x: [1, 2, 3],
-                y: [1, 2, 3],
-                type: "line",
-                mode: "lines+markers",
-                marker: { color: "red" },
-              },
-            ]}
-            layout={{ title: "Test Plot" }}
-          </Plot>
-        </div>
-        <div>
-          <Plot>
-            data=
-            {[
-              {
-                x: [1, 2, 3],
-                y: [1, 2, 3],
-                type: "line",
-                mode: "lines+markers",
-                marker: { color: "red" },
-              },
-            ]}
-            layout={{ title: "Test Plot" }}
-          </Plot>
-          <Plot>
-            data=
-            {[
-              {
-                x: [1, 2, 3],
-                y: [1, 2, 3],
-                type: "line",
-                mode: "lines+markers",
-                marker: { color: "red" },
-              },
-            ]}
-            layout={{ title: "Test Plot" }}
-          </Plot>
+    
+      {/* Images div */}
+      <div className = "img" style={{ display: "flex", flexWrap: "wrap", border: "1px solid #ccc", padding: "5px", width: "50%"}}>
+        <div style={{ display: "flex", flexDirection: "column" }}>
+          <div className="overflow-hidden" style={{ padding: "5px" }}>
+            <p>Nanostructure</p>
+            <img
+              src="https://i.ibb.co/jVmfXQG/one-cnt-and-board.png"
+              alt="Nanostructure"
+              style={{ maxWidth: "100%", height: "auto", objectFit: "contain" }}
+            />
+          </div>
+    
+          {/* Materials Stack */}
+          <div className="overflow-hidden" style={{ padding: "5px" }}>
+            <p>Materials Stack</p>
+            <img
+              src="https://i.ibb.co/19PVCWK/Field-penetration.png"
+              alt="Materials Stack"
+              style={{ maxWidth: "100%", height: "auto", objectFit: "contain" }}
+            />
+          </div>
+    
+          {/* Dielectric */}
+          <div className="overflow-hidden" style={{ padding: "5px" }}>
+            <p>Dielectric</p>
+            <img
+              src="https://i.ibb.co/rM7G6cd/Dielectric.png"
+              alt="Dielectric"
+              style={{ maxWidth: "100%", height: "auto", objectFit: "contain" }}
+            />
+          </div>
+    
+          {/* Circuit */}
+          <div className="overflow-hidden" style={{ padding: "5px" }}>
+            <p>Circuit</p>
+            <img
+              src="https://i.ibb.co/gtvy7Kn/circuit.png"
+              alt="Circuit"
+              style={{ maxWidth: "100%", height: "auto", objectFit: "contain" }}
+            />
+          </div>
+    
+          {/* Functionalization and Analyte */}
+          <div className="overflow-hidden" style={{ padding: "5px" }}>
+            <p>Functionalization and Analyte</p>
+            <img
+              src="https://i.ibb.co/HK0r4p6/channel.png"
+              alt="Channel"
+              style={{ maxWidth: "100%", height: "auto", objectFit: "contain" }}
+            />
+          </div>
         </div>
       </div>
     </div>
+        <style jsx>{`
+        @media (max-width: 775px) {
+            .container {
+                flex-direction: column; /* Stack images div under the table div */
+            }
+            /* Adjust div widths to full width when stacked */
+            .container > div {
+                width: 100%; /* This already sets the width of child divs to 100% */
+            }
+            
+            /* Add styles for tbl and img classes to take up full width */
+            .tbl, .img {
+                width: auto%; /* Make tbl and img take up full width */
+            }
+        }
+    `}</style>
+    </div>
+    
+    );
+
+    let experiment_dashboard = (
+      <div className="overflow-hidden" style={{ display: "inline-block" }}>
+          <div className="container" style={{ border: "1px solid #ccc", display: "flex", flexDirection: "row", flexWrap: "wrap", width: "100%" }}>
+              {/* Table div */}
+              <div className="tbl" style={{ border: "1px solid #ccc", width: "50%", padding: "0px" }}>
+                  <TableDisplay name={"Calculations"} data={calcs} setData={setCalcs} />
+              </div>
+        
+              {/* Plot div */}
+              <div className="plt" style={{ display: "flex", flexWrap: "wrap", border: "1px solid #ccc", padding: "0px", width: "50%" }}>
+                  <div className="plt" style={{ display: "flex", flexDirection: "column", width: "100%" }}>
+                      {/* Plot 1 */}
+                      <div className="overflow-hidden" style={{ width: "100%", padding: "5px" }}>
+                          <Plot
+                              data={[
+                                  { x: [1, 2, 3], y: [1, 2, 3], type: "line", mode: "lines+markers", marker: { color: "red" } },
+                              ]}
+                              layout={{ title: "Test Plot 1" }}
+                          />
+                      </div>
+                      {/* Plot 2 */}
+                      <div className="overflow-hidden" style={{ width: "100%", padding: "5px" }}>
+                          <Plot
+                              data={[
+                                  { x: [1, 2, 3], y: [1, 2, 3], type: "line", mode: "lines+markers", marker: { color: "red" } },
+                              ]}
+                              layout={{ title: "Test Plot 2" }}
+                          />
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <style jsx>{`
+              @media (max-width: 775px) {
+                  .container {
+                      flex-direction: column;
+                  }
+                  .tbl, .plt {
+                      width: 100%; /* Set the widths of tbl and plt to take up the whole width of the column */
+                  }
+              }
+          `}</style>
+      </div>
   );
+  
+  
 
   return (
     <div className="bg-white">

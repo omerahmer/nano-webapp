@@ -62,7 +62,7 @@ const Biosensor = () => {
         <animated.div className="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column font-link" style={fadeIn}>
               <Container className="mt-5 font-link">
         <h1 className="mb-4">Biosensor</h1>
-        <p className="overview">Simulation page -- under construction.</p>
+        <p className="overview">Simulation page -- still under construction.</p>
             </Container>
             {/* <h1>Biosensor page under construction!</h1> */}
             {/*Render the OldB component*/}
