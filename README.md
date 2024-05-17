@@ -1,5 +1,3 @@
 # nano_website
 
-cd to nano_website and run "npm i" then "npm start" in the terminal
-
-open another terminal window, cd to server, run "npm i" then "npm run dev"
+to make changes to website, clone the repo using git clone, make your changes in your own branch using git checkout, then make a pull request to merge the changes
