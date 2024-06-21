@@ -21,6 +21,7 @@ const Header = () => {
               <NavDropdown.Item href="/Biosensing">Biosensing</NavDropdown.Item>
               <NavDropdown.Item href="/EnergyStorage">Energy Storage</NavDropdown.Item>
               <NavDropdown.Item href="/EBeam">Electron-beam Lithography</NavDropdown.Item>
+              <NavDropdown.Item href="/Biosensor">Biosensor</NavDropdown.Item>
             </NavDropdown>
 
           </Nav>
