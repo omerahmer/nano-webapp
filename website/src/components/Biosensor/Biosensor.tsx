@@ -2,6 +2,12 @@ import React, { useEffect, useState } from "react";
 import { useSpring, animated } from "react-spring";
 import { useNavigate } from "react-router-dom";
 import { decodeToken } from "react-jwt";
+import { Container, Col } from 'react-bootstrap';
+
+
+// @ts-ignore
+import OldB from './OldB';
+
 import "../../index.css";
 
 const Biosensor = () => {
@@ -50,18 +56,21 @@ const Biosensor = () => {
     };
   }, [navigate]);
 
-  // Render loading state
-  if (loading) {
-    return <p>Loading...</p>;
-  }
-  return (
-    <animated.div
-      className="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column font-link"
-      style={fadeIn}
-    >
-      <h1>Biosensor page under construction!</h1>
-    </animated.div>
-  );
+    // Render loading state
+    if (loading) {
+        return <p>Loading...</p>;
+    }
+    return (
+        <animated.div className="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column font-link" style={fadeIn}>
+              <Container className="mt-5 font-link">
+        <h1 className="mb-4">Biosensor</h1>
+        <p className="overview">Simulation page -- still under construction.</p>
+            </Container>
+            {/* <h1>Biosensor page under construction!</h1> */}
+            {/*Render the OldB component*/}
+            <OldB />
+        </animated.div>
+    );
 };
 
 export default Biosensor;
