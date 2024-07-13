@@ -1,9 +1,15 @@
 {
   "dependencies": {
     "@types/react": "^18.3.3",
+    "plotly.js": "^2.33.0",
     "react-bootstrap": "^2.10.4",
     "react-jwt": "^1.2.1",
+    "react-plotly.js": "^2.6.0",
     "react-router-dom": "^6.24.1",
     "react-spring": "^9.7.3"
+  },
+  "devDependencies": {
+    "@types/react-csv": "^1.1.10",
+    "@types/react-plotly.js": "^2.6.3"
   }
 }

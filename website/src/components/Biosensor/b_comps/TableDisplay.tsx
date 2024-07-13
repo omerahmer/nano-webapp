@@ -1,8 +1,8 @@
 import React from "react";
 import { CSVLink } from "react-csv";
 
-const TableDisplay = ({ name, data, setData }) => {
-  function shrinkLen(input) {
+const TableDisplay = ({ name, data, setData }: { name: string, data: any, setData: Function }) => {
+  function shrinkLen(input: string) {
     input = input.toString();
     if (input.length > 12) {
       return input.substring(0, 12);
@@ -45,13 +45,13 @@ const TableDisplay = ({ name, data, setData }) => {
             <tbody>
               {Object.keys(data).map((key) => {
 
-if (data[key] === "header") {
-  return (
-      <tr key={key} className="header-row">
-          <td colSpan={1} className="py-2 font-bold text-left">{textCamelToSpace(key)}</td>
-      </tr>
-  );
-}
+                if (data[key] === "header") {
+                  return (
+                    <tr key={key} className="header-row">
+                      <td colSpan={1} className="py-2 font-bold text-left">{textCamelToSpace(key)}</td>
+                    </tr>
+                  );
+                }
 
 
 
@@ -80,7 +80,7 @@ if (data[key] === "header") {
   );
 };
 
-function textCamelToSpace(input) {
+function textCamelToSpace(input: string | any[]) {
   let output = input[0].toUpperCase();
   for (let i = 1; i < input.length; i++) {
     let char = input[i];
@@ -94,7 +94,7 @@ function textCamelToSpace(input) {
   return output;
 }
 
-function jsonToCSV(data) {
+function jsonToCSV(data: { [s: string]: unknown; } | ArrayLike<unknown>) {
   const outputArray = Object.entries(data).map(([key, value]) => [key, value]);
   return outputArray;
 }

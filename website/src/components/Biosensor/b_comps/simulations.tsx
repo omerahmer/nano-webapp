@@ -1,8 +1,6 @@
 import React from "react";
 
-export default (input) => {
-  let output = {};
-
+export default (input: { [x: string]: number; }) => {
   let permitivityOfFreeSpace = 8.85e-12;
   let boltzmannConstant = 1.38064852e-23;
   let electronCharge = 1.602176634e-19;
@@ -35,6 +33,7 @@ export default (input) => {
   let volumeOfMolecule =
     Math.pow(input["radiusOfMolecule"], 2) * pi * input["lengthOfMolecule"];
   let moleculeLength = input["lengthOfMolecule"];
+  let output: any = {}; // Define the type of the output object
   output["areaOfMoleculeOnCNTSurface"] = areaOfMoleculeOnCNTSurface;
   output["moleculeAreaWithGap"] = moleculeAreaWithGap;
   output["volumeOfMolecule"] = volumeOfMolecule;
@@ -185,11 +184,11 @@ export default (input) => {
     input["concentrationOfStandardState"] / 1000;
   let EDLLength = Math.sqrt(
     (input["relativePermittivity"] * permitivityOfFreeSpace * boltzmannTemp) /
-      (2 *
-        avagadroNumber *
-        input["concentrationOfStandardState"] *
-        Math.pow(input["chargeOfIonSpecies"], 2) *
-        Math.pow(electronCharge, 2))
+    (2 *
+      avagadroNumber *
+      input["concentrationOfStandardState"] *
+      Math.pow(input["chargeOfIonSpecies"], 2) *
+      Math.pow(electronCharge, 2))
   );
 
   let capacitanceEDLByLength =
@@ -198,7 +197,7 @@ export default (input) => {
     capacitanceEDLByLength *
     Math.cosh(
       (input["zetaPotential"] * input["chargeOfIonSpecies"] * electronCharge) /
-        (2 * boltzmannTemp)
+      (2 * boltzmannTemp)
     );
 
   let capacitanceEDLByArea =
@@ -211,7 +210,7 @@ export default (input) => {
         permitivityOfFreeSpace *
         Math.pow(input["chargeOfIonSpecies"], 2) *
         Math.pow(electronCharge, 2)) /
-        boltzmannTemp
+      boltzmannTemp
     );
 
   let capacitanceEDLPerCNT = capacitanceEDLByArea * surfaceAreaOneCNT;
@@ -259,12 +258,12 @@ export default (input) => {
     totalSeriesImpedanceWithEDLAndFunctionalizationAndAnalyte;
   let totalImpedanceMagnitudeWithEDLandFunctionalization = Math.sqrt(
     Math.pow(impedadanceOfEDLAndFunctionalization, 2) +
-      Math.pow(input["seriesResistanceOfSolution"], 2)
+    Math.pow(input["seriesResistanceOfSolution"], 2)
   );
 
   let totalImpedanceMagnitudeWithEDLandFunctionalizationAndAnalyte = Math.sqrt(
     Math.pow(impedanceOfEDLAndFunctionalizationAndAnalyte, 2) +
-      Math.pow(input["seriesResistanceOfSolution"], 2)
+    Math.pow(input["seriesResistanceOfSolution"], 2)
   );
 
   let maxCurrentWithSolventAndEDLAndFunctionalization =

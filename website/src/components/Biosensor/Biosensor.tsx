@@ -6,7 +6,8 @@ import { Container, Col } from 'react-bootstrap';
 
 
 // @ts-ignore
-import OldB from './OldB';
+
+import OldB from "./OldB"
 
 import "../../index.css";
 
