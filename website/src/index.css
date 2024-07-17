@@ -76,6 +76,19 @@
 }
 
 h2.pb-2.border-bottom {
-  font-size: 2.5em;  /* Example: Increase the font size */
+  font-size: 2.5em;
+  /* Example: Increase the font size */
   font-weight: bold;
+}
+
+*,
+:root {
+  font-family: 'Inter', sans-serif !important;
+  font-feature-settings: 'liga' 1, 'calt' 1;
+}
+
+@supports (font-variation-settings: normal) {
+  :root {
+    font-family: InterVariable, sans-serif;
+  }
 }

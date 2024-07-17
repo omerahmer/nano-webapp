@@ -1,0 +1,74 @@
+body {
+    padding: 20px 20px 0 20px;
+    margin: 0;
+    overflow: auto;
+}
+
+/*
+ * Page layout
+ */
+
+.controls {
+    width: 30%;
+    height: 100%;
+    float: left;
+    padding-right: 50px;
+}
+
+.field {
+    position: relative;
+    margin: 10px;
+}
+
+#grid-submit-btn,
+#chip-submit-btn,
+#write-chip-btn {
+    margin: 0 auto 0 10px;
+}
+
+#write-chip-btn {
+    margin-top: 40px;
+}
+
+#size-controller,
+#chip-controller {
+    margin-bottom: 40px;
+}
+
+#wait-time-controller {
+    margin-bottom: 40px;
+}
+
+/*
+#com-port-controller {
+    margin: 10px auto 0 10px;
+}
+
+
+ * Grid style
+ */
+
+.grid {
+    display: grid;
+}
+
+.tile {
+    width: 40px;
+    height: 40px;
+    background-color: pink;
+    border: 1px solid gray;
+}
+
+.tile:hover {
+    background-color: lightblue;
+    cursor: pointer;
+}
+
+.tile[selected] {
+    background-color: lightgreen;
+}
+
+.tile[selected]:hover {
+    background-color: greenyellow;
+    cursor: pointer;
+}

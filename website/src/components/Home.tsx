@@ -64,13 +64,13 @@ const Home: React.FC = () => {
                     <div className="col-lg-7 p-3 p-lg-5 pt-lg-3">
                         <h1 className="display-4 fw-bold lh-1 text-body-emphasis">Welcome to the Nanotechnology Laboratory at UC Berkeley!</h1>
                         <p className="lead">Welcome to our lab, where innovation converges to redefine biosensing, energy storage,
-                chip lithography, and much more. Our carbon nanotube sensors, developed in collaboration with
-                institutions including NASA Ames, Stanford, UCSF, LBNL, and UC Davis Medical
-                Center, revolutionize biosensing with unparalleled sensitivity, enabling in-situ detection
-                of multiple biomarkers. <br></br><br></br>Beyond biosensing, these nanotubes achieve remarkable energy density in the form of a supercapacitor, setting a
-                new standard for energy storage capabilities. Join us in exploring the transformative potential of
-                nanotechnology in reshaping the future of biosensing and sustainable energy solutions.</p>
-                <br></br>
+                            chip lithography, and much more. Our carbon nanotube sensors, developed in collaboration with
+                            institutions including NASA Ames, Stanford, UCSF, LBNL, and UC Davis Medical
+                            Center, revolutionize biosensing with unparalleled sensitivity, enabling in-situ detection
+                            of multiple biomarkers. <br></br><br></br>Beyond biosensing, these nanotubes achieve remarkable energy density in the form of a supercapacitor, setting a
+                            new standard for energy storage capabilities. Join us in exploring the transformative potential of
+                            nanotechnology in reshaping the future of biosensing and sustainable energy solutions.</p>
+                        <br></br>
                         <div className="d-grid gap-2 d-md-flex justify-content-md-start mb-4 mb-lg-3">
                             <a href="/Biosensor">
                                 <button type="button" className="btn btn-success btn-lg px-4 me-md-2 fw-bold">Biosensor Calculations</button>
@@ -89,7 +89,7 @@ const Home: React.FC = () => {
                     <div className="col">
                         <a href="/Biosensing" style={linkStyle}>
                             <CardWithHover
-                                backgroundImage="/biosensing%20pics/biosensing_pic-min.JPG"
+                                backgroundImage="/biosensing%20pics/biosensing_pic-min-min.JPG"
                                 title="Biosensing"
                                 content="Biometric tracking, microfluidics, and more."
                                 buttonText=''

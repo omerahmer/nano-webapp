@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useSpring, animated } from "react-spring";
 import { useNavigate } from "react-router-dom";
 import { decodeToken } from "react-jwt";
-import { Container, Col } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
 
 
 // @ts-ignore
@@ -67,9 +67,8 @@ const Biosensor = () => {
         <h1 className="mb-4">Biosensor</h1>
         <p className="overview">Simulation page -- still under construction.</p>
       </Container>
-      {/* <h1>Biosensor page under construction!</h1> */}
-      {/*Render the OldB component*/}
       <OldB />
+      <h1 className="mb-4" style={{ padding: "20px" }}>Links</h1>
     </animated.div>
   );
 };

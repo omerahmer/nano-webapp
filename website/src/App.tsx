@@ -10,6 +10,7 @@ import EnergyStorage from "./components/Energy Storage/EnergyStorage";
 import Login from "./components/Login/login";
 import Biosensor from "./components/Biosensor/Biosensor";
 import Register from "./components/Register/Register";
+import Chip from "./components/FieldEmissions/Chip";
 function App() {
   return (
     <Router>
@@ -24,6 +25,7 @@ function App() {
           <Route path="/Biosensor" element={<Biosensor />} />
           <Route path="/Login" element={<Login />} />
           <Route path="/Register" element={<Register />} />
+          <Route path="/Chip" element={<Chip />} />
         </Routes>
       </div>
     </Router>

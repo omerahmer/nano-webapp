@@ -16,7 +16,7 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static(dir));
 
-app.listen(sock, () => {console.log("running")})
+app.listen(sock, () => { console.log("running") })
 
 const csvFilePath = 'users.csv';
 
