@@ -87,8 +87,16 @@ h2.pb-2.border-bottom {
   font-feature-settings: 'liga' 1, 'calt' 1;
 }
 
+body {
+  padding: 0px
+}
+
 @supports (font-variation-settings: normal) {
   :root {
     font-family: InterVariable, sans-serif;
   }
+}
+
+button:focus {
+  background-color: #9f23c4;
 }

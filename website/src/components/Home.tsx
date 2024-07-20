@@ -100,7 +100,7 @@ const Home: React.FC = () => {
                     <div className="col">
                         <a href="/EnergyStorage" style={linkStyle}>
                             <CardWithHover
-                                backgroundImage="/ebeam%20pics/cubething.png"
+                                backgroundImage="/ebeam%20pics/cubething-min.png"
                                 title="Energy Storage"
                                 content="Batteries that can charge phones for a week within seconds."
                                 buttonText=''
@@ -111,7 +111,7 @@ const Home: React.FC = () => {
                     <div className="col">
                         <a href="/EBeam" style={linkStyle}>
                             <CardWithHover
-                                backgroundImage="ebeam%20pics/lithography.jpg"
+                                backgroundImage="ebeam%20pics/lithography-min.jpg"
                                 title="E-beam Lithography"
                                 content="Extreme precision lithography with small feature sizes enabled by CNT's."
                                 buttonText=''

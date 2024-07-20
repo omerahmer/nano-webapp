@@ -1,5 +1,6 @@
 import React from "react";
 import { CSVLink } from "react-csv";
+import "./table.css"
 
 const TableDisplay = ({ name, data, setData }: { name: string, data: any, setData: Function }) => {
   function shrinkLen(input: string) {
@@ -35,7 +36,7 @@ const TableDisplay = ({ name, data, setData }: { name: string, data: any, setDat
       {/* Value Table */}
       <div className="flex w-full">
         <div className="w-1/2 p-2">
-          <table className="w-full table-fixed border border-gray-300">
+          <table className="custom-table">
             <thead>
               <tr className="bg-gray-200 border-b-2 border-gray-300">
                 <th className="p-1 text-left text-xl font-semibold">{name} Configuration</th>
@@ -44,7 +45,6 @@ const TableDisplay = ({ name, data, setData }: { name: string, data: any, setDat
             </thead>
             <tbody>
               {Object.keys(data).map((key) => {
-
                 if (data[key] === "header") {
                   return (
                     <tr key={key} className="header-row">
@@ -52,9 +52,6 @@ const TableDisplay = ({ name, data, setData }: { name: string, data: any, setDat
                     </tr>
                   );
                 }
-
-
-
                 return (
                   <tr key={key} className="border-b border-gray-300">
                     <td className="p-1 text-left">{textCamelToSpace(key)}:</td>

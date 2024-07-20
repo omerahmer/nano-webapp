@@ -18,14 +18,14 @@ export default function OldB() {
 
   let experiment_config = (
     <div className="overflow-hidden" style={{ display: "inline-block" }}>
-      <div className="container" style={{ border: "1px solid #ccc", display: "flex", flexWrap: "wrap", width: "100%" }}>
+      <div className="container" style={{ border: "", display: "flex", flexWrap: "wrap", width: "100%" }}>
         {/* Table div */}
-        <div className="tbl" style={{ border: "1px solid #ccc", width: "50%", padding: "0px" }}>
+        <div className="tbl" style={{ border: "", width: "50%", padding: "0px" }}>
           <TableDisplay name={"Simulation"} data={sims} setData={setSims} />
         </div>
 
         {/* Images div */}
-        <div className="img" style={{ display: "flex", flexWrap: "wrap", border: "1px solid #ccc", padding: "5px", width: "50%" }}>
+        <div className="img" style={{ display: "flex", flexWrap: "wrap", border: "", padding: "5px", width: "50%" }}>
           <div style={{ display: "flex", flexDirection: "column" }}>
             <div className="overflow-hidden" style={{ padding: "5px" }}>
               <p>Nanostructure</p>

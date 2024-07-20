@@ -1,0 +1,11 @@
+.custom-table {
+    width: 100%;
+    table-layout: fixed;
+    border: 1px solid #ccc;
+    border-collapse: separate !important;
+    border-radius: 8px;
+    /* Adjust as needed */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    /* Adjust shadow as needed */
+    padding: 5px;
+}

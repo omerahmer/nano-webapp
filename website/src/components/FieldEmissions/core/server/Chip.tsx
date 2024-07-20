@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import './static/styles.css'
-
 interface Props {
     comPorts: string[];
 }

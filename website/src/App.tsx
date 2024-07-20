@@ -10,7 +10,7 @@ import EnergyStorage from "./components/Energy Storage/EnergyStorage";
 import Login from "./components/Login/login";
 import Biosensor from "./components/Biosensor/Biosensor";
 import Register from "./components/Register/Register";
-import Chip from "./components/FieldEmissions/Chip";
+import Chip from "./components/FieldEmissions/core/server/Chip";
 function App() {
   return (
     <Router>
